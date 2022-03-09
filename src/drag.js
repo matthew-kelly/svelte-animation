@@ -1,15 +1,19 @@
 import { spring } from 'svelte/motion'
 
-export function drag(node, params) {
+// options:
+// direction: 'x', 'y', false (no restriction)
+// reset: true (return to original position on mouseup), false (stay in new position)
+
+export function drag(node, { direction = false, reset = true } = {}) {
   let x, y;
 
   const coordinates = spring({ x: 0, y: 0 }, { stiffness: 0.2, damping: 0.4 });
 
   // default directions
   let directions = { x: true, y: true };
-  if (params?.direction === 'x') {
+  if (direction === 'x') {
     directions.y = false;
-  } else if (params?.direction === 'y') {
+  } else if (direction === 'y') {
     directions.x = false
   }
 
@@ -41,12 +45,16 @@ export function drag(node, params) {
   }
 
   function handleMouseUp() {
+    // fire up event
+    node.dispatchEvent(new CustomEvent('dragStop', { detail: { x, y } }));
     // reset values (leave this out to keep object in new location)
-    x = 0;
-    y = 0;
-    coordinates.update(() => {
-      return { x, y }
-    })
+    if (reset) {
+      x = 0;
+      y = 0;
+      coordinates.update(() => {
+        return { x, y }
+      })
+    }
     // remove event listeners
     window.removeEventListener("mousemove", handleMouseMove);
     window.removeEventListener("mouseup", handleMouseUp);

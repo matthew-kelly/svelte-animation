@@ -210,15 +210,20 @@ button {
   border-radius: 10px;
   padding: 5px 25px;
   box-shadow: var(--level-1);
-  transition: 0.3s ease-in-out box-shadow;
+  cursor: pointer;
+  transition: 0.1s ease-in-out box-shadow, 0.1s ease-in-out filter;
 }
 
 button:hover {
   box-shadow: var(--level-2);
+  filter: brightness(95%);
 }
 
 button[disabled] {
   opacity: 0.4;
+  cursor: default;
+  filter: brightness(100%);
+  box-shadow: var(--level-1);
 }
 
 /* .cancel can mean anything */
@@ -309,14 +314,14 @@ button.small {
   border-radius: var(--borderRadius) var(--borderRadius) 0 0;
 }
 
-/* First item will never have margin top */
-.card,
+/* 2nd item will never have margin top (because of the drawer--close button) */
+.card > *:nth-child(2),
 .drawer > *:first-child {
   margin-top: 0;
 }
 
 /* Last item will never have margin bottom */
-.card,
+.card > *:last-child,
 .drawer > *:last-child {
   margin-bottom: 0;
 }

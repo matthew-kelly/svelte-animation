@@ -1,7 +1,7 @@
 <script>
   import { custom } from "./custom";
   import { alert } from "./alert";
-
+  import { bounceOut } from "svelte/easing";
   import { onMount } from "svelte";
   import { fade, fly } from "svelte/transition";
   import Nav from "./Nav.svelte";
@@ -25,6 +25,7 @@
   let isModalOpen = false;
   let isCardActive = false;
   let y;
+  let cubes = [...Array(25).keys()];
 
   function toggleNav() {
     isNavOpen = !isNavOpen;
@@ -85,10 +86,26 @@
     </Modal>
   {/if}
 
+  <!-- Delayed animations (multiply by index) -->
+  <div class="grid">
+    {#each cubes as cube, i}
+      <div
+        class="box"
+        transition:fly={{
+          duration: 1000,
+          delay: i * 100,
+          easing: bounceOut,
+          y: -100,
+        }}
+      />
+    {/each}
+  </div>
+
   <Box />
 
   <Cross />
 
+  <!-- Reveal on scroll -->
   <div class="card" class:hidden={!isCardActive}>
     <h3>Card</h3>
     <p>I'm filling space! But only if isCardActive!</p>
@@ -106,5 +123,17 @@
   .card {
     transition: opacity 0.3s ease;
     margin-bottom: 1rem;
+  }
+
+  .box {
+    background: var(--primary);
+    box-shadow: var(--level-3);
+    height: 100px;
+    width: 100px;
+  }
+
+  .grid {
+    --gridCols: 5;
+    gap: 20px;
   }
 </style>

@@ -8,6 +8,7 @@
   import Toast from "./Toast.svelte";
   import Modal from "./Modal.svelte";
   import Box from "./Box.svelte";
+  import Cross from "./Cross.svelte";
   // Svelte transitions
   // ------------------
   // Fade - opacity
@@ -86,25 +87,11 @@
 
   <Box />
 
-  <div class="card">
-    <h3>Card</h3>
-    <p>I'm filling space!</p>
-  </div>
+  <Cross />
+
   <div class="card" class:hidden={!isCardActive}>
-    <h3>Second Card</h3>
+    <h3>Card</h3>
     <p>I'm filling space! But only if isCardActive!</p>
-  </div>
-  <div class="card">
-    <h3>Card</h3>
-    <p>I'm filling space!</p>
-  </div>
-  <div class="card">
-    <h3>Card</h3>
-    <p>I'm filling space!</p>
-  </div>
-  <div class="card">
-    <h3>Card</h3>
-    <p>I'm filling space!</p>
   </div>
 </main>
 

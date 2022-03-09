@@ -24,6 +24,7 @@ export function drag(node, { direction = false, reset = true } = {}) {
   // MOUSE
   // -----
   function handleMouseDown(event) {
+    event.preventDefault();
     x = event.clientX;
     y = event.clientY;
     window.addEventListener("mousemove", handleMouseMove);
@@ -31,6 +32,7 @@ export function drag(node, { direction = false, reset = true } = {}) {
   }
 
   function handleMouseMove(event) {
+    event.preventDefault()
     // deltas
     const dx = event.clientX - x;
     const dy = event.clientY - y;
@@ -63,6 +65,7 @@ export function drag(node, { direction = false, reset = true } = {}) {
   // TOUCH
   // -----
   function handleTouchStart(event) {
+    event.preventDefault();
     x = event.touches[0].clientX;
     y = event.touches[0].clientY;
     node.addEventListener("touchmove", handleTouchMove);

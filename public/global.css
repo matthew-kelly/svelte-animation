@@ -314,8 +314,8 @@ button.small {
   border-radius: var(--borderRadius) var(--borderRadius) 0 0;
 }
 
-/* 2nd item will never have margin top (because of the drawer--close button) */
-.card > *:nth-child(2),
+/* First item will never have margin top */
+.card > *:first-child,
 .drawer > *:first-child {
   margin-top: 0;
 }
